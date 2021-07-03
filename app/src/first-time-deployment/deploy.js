@@ -11,7 +11,7 @@ const web3 = new Web3(walletProvider);
 
 let accounts, contract;
 
-const CONTRACT_ADDRESS = "0xdefd6fe0b61bf55fd12183f4820dd9e5011b645b";
+const CONTRACT_ADDRESS = "0x416d378c96bd60712cb390c77435a3cb397a6a1a";
 
 async function deploy() {
   try {
@@ -21,12 +21,15 @@ async function deploy() {
     console.log("deployer account: ", accounts[0]);
 
     // contract = await new web3.eth.Contract(abi)
-    //   .deploy({ data: bytecode, arguments: [] })
+    //   .deploy({ data: bytecode, arguments: ["Hello World!!!"] })
     //   .send({ from: accounts[0], gas: "1000000" });
 
     contract = await new web3.eth.Contract(abi, CONTRACT_ADDRESS);
-    const message = await contract.methods.getTodos().send({ from: accounts[0] });
-    console.log("message: ", message.events.SendingTodos.returnValues);
+    const method = contract.methods.setMessage("gheisenberg");
+    console.log(method)
+    console.log(await method.send({from: accounts[0]}));
+    const message = await contract.methods.message().call();
+    console.log("message: ", message);
   }
   catch(err) {
     console.error(err);

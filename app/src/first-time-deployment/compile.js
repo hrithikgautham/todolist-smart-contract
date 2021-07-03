@@ -2,13 +2,13 @@ const path = require('path');
 const fs = require('fs');
 const solc = require("solc");
 
-const contractPath = path.join(__dirname, "..", "contracts", "TodoList.sol");
+const contractPath = path.join(__dirname, "..", "contracts", "Inbox.sol");
 const sourceCode = fs.readFileSync(contractPath, "utf8");
 
 var input = {
   language: 'Solidity',
   sources: {
-    'TodoList.sol': {content : sourceCode}
+    'Inbox.sol': {content : sourceCode}
   },
   settings: {
     outputSelection: {
@@ -19,7 +19,7 @@ var input = {
   }
 };
 
-const contract = JSON.parse(solc.compile(JSON.stringify(input))).contracts["TodoList.sol"]["TodoList"];
+const contract = JSON.parse(solc.compile(JSON.stringify(input))).contracts["Inbox.sol"]["Inbox"];
 
 console.log("abi: ", contract.abi);
 

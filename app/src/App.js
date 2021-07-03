@@ -36,7 +36,7 @@ class Contract extends Component {
       const message = await contract.methods.message().call();
       console.log("message: ", message);
       this.setState({ showLoader: false });
-    }
+    } 
     catch(err) {
       console.log("error in componentDidMount()..!!");
       console.error(err);
